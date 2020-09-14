@@ -3,8 +3,8 @@ class Dog():
         self.name = name
         self.age = age
         self.owner = owner
-        self.breed = ""
-        self.toy = ""
+        self.breed = "Unknown"
+        self.toy = "Unknown"
         self.bff = []
 
     def set_name(self, name):
@@ -96,10 +96,3 @@ def daycare_init():  # Fix inputs later
     name = input("Enter the name of the daycare\n:")
     boss = input("Enter the boss name\n: ")
     return(name, boss)
-
-
-# hund = Dog("Pelle", 17, "Gus")
-# hund2 = Dog("elleP", 71, "suG")
-# dagbry = Dog_daycare("Vacker Tass", "Heidi")
-# print(dagbry.name, dagbry.boss)
-# print(dagbry.find_dog("Pelle").owner)

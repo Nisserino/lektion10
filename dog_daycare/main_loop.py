@@ -6,13 +6,13 @@ input_options = [
     "dog.conf", "change boss", "quit"
     ]
 conf_options = [
-    "help", "owner", "favtoy", "age",
+    "help", "stats", "owner", "favtoy", "age",
     "name", "breed", "bff", "go back"
     ]
 print(
     f"Welcome to the daycare {daycare.name}!\n What would you like to do?\n"
     "You can add dogs, their breeds, best friends and much more\n"
-    "To see all your options, write 'help'\n"
+    "To see all your options, write 'help'"
 )
 while True:
     usr_input = bg.text_input()
@@ -38,21 +38,27 @@ while True:
             dog = daycare.find_dog(bg.text_input())
             print(f"Your options are: {conf_options}")
             usr_input = bg.text_input()
-
-            if usr_input == "name":
-                print(f"Changing {dog.name}s name to ... \n: ")
+            if usr_input == "stats":
+                print(
+                   f"Name: {dog.name}\tAge: {dog.age}\n"
+                   f"Owner: {dog.owner}\tBreed: {dog.breed}\n"
+                   f"Favourite toy: {dog.toy}\tBff: {dog.bff}"
+                    )
+            elif usr_input == "name":
+                print(f"Changing {dog.name}s name to ...")
                 dog.set_name(bg.text_input())
-                # print(f"{dog.name.title()}")
             elif usr_input == "owner":
                 dog.set_owner(bg.text_input())
             elif usr_input == "favtoy":
-                pass
+                dog.set_toy(bg.text_input())
             elif usr_input == "age":
-                pass
+                dog.set_age(bg.int_input())
             elif usr_input == "breed":
-                pass
+                dog.set_breed(bg.text_input())
             elif usr_input == "go back":
                 pass
+            elif usr_input == "bff":
+                dog.add_bff(daycare.find_dog(bg.text_input()))
             elif usr_input == "help":
                 print(f"Your options are: {conf_options}")
             else:
