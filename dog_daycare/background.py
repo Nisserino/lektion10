@@ -28,6 +28,21 @@ class Dog():
         else:
             self.bff = [bff]
 
+    def show_stats(self):
+        print(
+            f"Name: {self.name}\tAge: {self.age}\tOwner: {self.owner}\n"
+            f"Breed: {self.breed}\tFavourite toy: {self.toy}"
+        )
+        if self.breed == "golden retriever":
+            friends = []
+            for self in self.bff:
+                friends.append(self.name)
+            print(f"Bff(s){friends}")
+        elif self.bff:
+            print(f"Bff: {self.bff[0].name}\n")
+        else:
+            print(f"{self.name} has no best friend yet.\n")
+
 
 class Dog_daycare:
     def __init__(self, name, boss):
@@ -69,13 +84,15 @@ def text_input():
 
 
 def int_input():
-    try:
-        number = int(input(": "))
-        return number
-    except ValueError:
-        print("Enter an integer")
-    except Exception as e:
-        print(f"Error: {e}")
+    while True:
+        try:
+            number = int(input(": "))
+            return number
+            break
+        except ValueError:
+            print("Enter an integer")
+        except Exception as e:
+            print(f"Error: {e}")
 
 
 def dog_init():
