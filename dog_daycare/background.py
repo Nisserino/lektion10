@@ -30,7 +30,7 @@ class Dog():
 
     def show_stats(self):
         print(
-            f"Name: {self.name}\tAge: {self.age}\tOwner: {self.owner}\n"
+            f"\nName: {self.name}\tAge: {self.age}\tOwner: {self.owner}\n"
             f"Breed: {self.breed}\tFavourite toy: {self.toy}"
         )
         if self.breed == "golden retriever":
