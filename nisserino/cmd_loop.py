@@ -18,11 +18,12 @@ class Daycare_loop(cmd.Cmd):
 
     def do_add_dog(self, arg):  # Fix strip in some sense
         'Add a dog: add_dog name,age,owner'
-        try:
-            name, age, owner = arg.split(",")
-            daycare.add_dog(name.lower().strip(), int(age), owner.lower().strip())
-        except Exception as e:
-            print(f"Error: {e}")
+        daycare.add_dog(*parse(arg))
+        # try:
+        #     name, age, owner = arg.split(",")
+        #     daycare.add_dog(name.lower().strip(), int(age), owner.lower().strip())
+        # except Exception as e:
+        #     print(f"Error: {e}")
 
     def do_remove_dog(self, dog):  # Add option to remove by id/owner/age
         'Remove a dog: remove_dog dog_name'
@@ -96,6 +97,20 @@ class Daycare_loop(cmd.Cmd):
     def do_quit(self, arg):
         'Exit the program'
         return True
+
+
+def fix_input(arg):
+    try:
+        return int(arg)
+    except ValueError:
+        return arg.lower().strip()
+
+
+def parse(arg):
+    try:
+        return tuple(map(fix_input, arg.split(",")))
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 Daycare_loop().cmdloop()
