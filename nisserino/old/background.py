@@ -76,3 +76,43 @@ class Dog_daycare:
     def show_dogs(self):
         for dog in self.dogs:
             print(dog.name)
+
+
+def text_input():
+    try:
+        text = input("\n: ").strip().lower()
+        return text
+    except Exception as e:
+        print(f"error: {e}")
+
+
+def int_input():
+    while True:
+        try:
+            number = int(input(": "))
+            return number
+            break
+        except ValueError:
+            print("Enter an integer")
+        except Exception as e:
+            print(f"Error: {e}")
+
+
+def dog_init():
+    while True:
+        try:
+            name = input("Enter dogs name\n: ").strip().lower()
+            age = int(input("Enter dogs age\n: "))
+            owner = input("Enter the owners name\n: ").strip().lower()
+            break
+        except ValueError:
+            print("You need to enter an integer for the age\n")
+        except Exception as e:
+            print(f"Error: {e}")
+    return name, age, owner
+
+
+def daycare_init():  # Fix inputs later
+    name = input("Enter the name of the daycare\n:")
+    boss = input("Enter the boss name\n: ")
+    return(name, boss)

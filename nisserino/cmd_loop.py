@@ -19,7 +19,8 @@ class Daycare_loop(cmd.Cmd):
     def do_add_dog(self, arg):
         'Add a dog: add_dog name,age,owner'
         try:
-            daycare.add_dog(*parse(arg))
+            name, age, owner = parse(arg)
+            daycare.add_dog(name, int(age), owner)
         except Exception as e:
             print(f"Error: {e}")
 
