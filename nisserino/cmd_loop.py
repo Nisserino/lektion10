@@ -1,12 +1,12 @@
 import cmd
-from background import Dog, Dog_daycare
+import background as bg
 
-daycare = Dog_daycare("Vacker Tass", "Nisse")
+daycare = bg.Dog_daycare("Vacker Tass", "Nisse")
 
 
 class Daycare_loop(cmd.Cmd):
     intro = "Welcome to the daycare"
-    prompt = "(Daycare): "
+    prompt = "(Admin): "
 
     def do_show_dogs(self, arg):
         'Show the names of all dogs in the daycare'
@@ -16,83 +16,49 @@ class Daycare_loop(cmd.Cmd):
         'Shows all info about all dogs in the daycare'
         print("Pranked!")
 
-    def do_add_dog(self, arg):  # Don't think I can remove try except here
+    def do_add_dog(self, arg):
         'Add a dog: add_dog name,age,owner'
-        try:
-            name, age, owner = parse(arg)
-            daycare.add_dog(name, int(age), owner)
-        except Exception as e:
-            print(f"Error: {e}")
+        daycare.add_dog(arg)
 
-    def do_remove_dog(self, dog):  # Add option to remove by id/owner/age
+    def do_remove_dog(self, arg):
         'Remove a dog: remove_dog dog_name'
-        try:
-            daycare.remove_dog(daycare.find_dog(dog))
-        except Exception as e:
-            print(f"Error {e}")
+        daycare.remove_dog(daycare, arg)
 
-    def do_stats(self, dog):
+    def do_stats(self, arg):
         'Show specific dogs stats: stats dog_name'
-        try:
-            daycare.find_dog(dog).show_stats()
-        except Exception as e:
-            print(f"Error: {e}")
+        bg.show_stats(daycare, arg)
 
     def do_dog_name(self, arg):
         'Change dog name: dog_name name, newname'
-        try:
-            dog, new_name = parse(arg)
-            daycare.find_dog(dog).set_name(new_name)
-        except Exception as e:
-            print(f"Error: {e}")
+        bg.set_name(daycare, arg)
 
     def do_dog_owner(self, arg):
         'Change dog owner: dog_owner dog_name, new_owner'
-        try:
-            dog, new_owner = parse(arg)
-            daycare.find_dog(dog).set_owner(new_owner)
-        except Exception as e:
-            print(f"Error: {e}")
+        bg.set_owner(daycare, arg)
 
     def do_dog_toy(self, arg):
         'Change dog toy: dog_name, toy'
-        try:
-            dog, toy = parse(arg)
-            daycare.find_dog(dog).set_toy(toy)
-        except Exception as e:
-            print(f"Error: {e}")
+        bg.set_toy(daycare, arg)
 
     def do_dog_age(self, arg):
         'Change dog age: dog_name, age'
-        dog, new_age = parse(arg)
-        daycare.find_dog(dog).set_age(new_age)
+        bg.set_age(daycare, arg)
 
     def do_dog_breed(self, arg):
         'Change dog breed: dog_name, dog_breed'
-        try:
-            dog, breed = parse(arg)
-            daycare.find_dog(dog).set_breed(breed)
-        except Exception as e:
-            print(f"Error: {e}")
+        bg.set_breed(daycare, arg)
 
     def do_dog_bff(self, arg):
         'Add dogs bff: dog_bff dog_name, bffs_name'
-        try:
-            dog, bff = parse(arg)
-            daycare.find_dog(dog).add_bff(daycare.find_dog(bff))
-        except Exception as e:
-            print(f"Error: {e}")
+        bg.add_bff(daycare, arg)
 
     def do_daycare_name(self, arg):
         'Change the name of the daycare: daycare_name new_name'
         daycare.set_daycare_name(arg)
 
-    def do_change_boss(self, arg):
+    def do_daycare_boss(self, arg):
         'Change boss to a new one: change_boss name'
-        try:
-            daycare.set_boss_name(arg)
-        except Exception as e:
-            print(f"Error: {e}")
+        daycare.set_boss_name(arg)
 
     def do_daycare_info(self, arg):
         'Show info about the daycare'
@@ -101,20 +67,6 @@ class Daycare_loop(cmd.Cmd):
     def do_quit(self, arg):
         'Exit the program'
         return True
-
-
-def fix_input(arg):
-    try:
-        return int(arg)
-    except ValueError:
-        return arg.lower().strip()
-
-
-def parse(arg):
-    try:
-        return tuple(map(fix_input, arg.split(",")))
-    except Exception as e:
-        print(f"Error: {e}")
 
 
 Daycare_loop().cmdloop()
