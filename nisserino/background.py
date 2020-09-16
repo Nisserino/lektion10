@@ -1,4 +1,6 @@
 class Dog():
+    id = 0
+
     def __init__(self, name, age, owner):
         self.name = name
         self.age = age
@@ -6,6 +8,8 @@ class Dog():
         self.breed = "Unknown"
         self.toy = "Unknown"
         self.bff = []
+        Dog.id += 1
+        self.id = Dog.id
 
     def set_name(self, name):
         self.name = name
@@ -28,8 +32,9 @@ class Dog():
         else:
             self.bff = [bff]
 
-    def show_stats(self):
+    def show_stats(self):  # Make printout prettier (not a priority)
         print(
+            f"\nId: {self.id}"
             f"\nName: {self.name}\tAge: {self.age}\tOwner: {self.owner}\n"
             f"Breed: {self.breed}\tFavourite toy: {self.toy}"
         )
@@ -64,13 +69,11 @@ class Dog_daycare:
         for dog in self.dogs:
             if dog.name == name:
                 return dog
-            else:
-                pass
 
     def remove_dog(self, dog):
         self.dogs.remove(dog)
 
-    def all_dogs(self):
+    def show_dogs(self):
         for dog in self.dogs:
             print(dog.name)
 
