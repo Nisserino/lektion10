@@ -1,5 +1,5 @@
 import cmd
-from background import *
+from background import Dog, Dog_daycare
 
 daycare = Dog_daycare("Vacker Tass", "Nisse")
 
@@ -7,16 +7,16 @@ daycare = Dog_daycare("Vacker Tass", "Nisse")
 class Daycare_loop(cmd.Cmd):
     intro = "Welcome to the daycare"
     prompt = "(Daycare): "
-    file = None
 
     def do_show_dogs(self, arg):
-        'Show the names of all dogs in the Day-care!'
-        try:
-            daycare.show_dogs()
-        except Exception as e:
-            print(f"Error: {e}")
+        'Show the names of all dogs in the daycare'
+        daycare.show_dogs()
 
-    def do_add_dog(self, arg):
+    def do_show_dogs_all(self, arg):
+        'Shows all info about all dogs in the daycare'
+        print("Pranked!")
+
+    def do_add_dog(self, arg):  # Don't think I can remove try except here
         'Add a dog: add_dog name,age,owner'
         try:
             name, age, owner = parse(arg)
@@ -30,13 +30,6 @@ class Daycare_loop(cmd.Cmd):
             daycare.remove_dog(daycare.find_dog(dog))
         except Exception as e:
             print(f"Error {e}")
-
-    def do_change_boss(self, arg):
-        'Change boss to a new one: change_boss name'
-        try:
-            daycare.set_boss_name(arg)
-        except Exception as e:
-            print(f"Error: {e}")
 
     def do_stats(self, dog):
         'Show specific dogs stats: stats dog_name'
@@ -71,11 +64,8 @@ class Daycare_loop(cmd.Cmd):
 
     def do_dog_age(self, arg):
         'Change dog age: dog_name, age'
-        try:
-            dog, new_age = parse(arg)
-            daycare.find_dog(dog).set_age(new_age)
-        except Exception as e:
-            print(f"Error: {e}")
+        dog, new_age = parse(arg)
+        daycare.find_dog(dog).set_age(new_age)
 
     def do_dog_breed(self, arg):
         'Change dog breed: dog_name, dog_breed'
@@ -92,6 +82,21 @@ class Daycare_loop(cmd.Cmd):
             daycare.find_dog(dog).add_bff(daycare.find_dog(bff))
         except Exception as e:
             print(f"Error: {e}")
+
+    def do_daycare_name(self, arg):
+        'Change the name of the daycare: daycare_name new_name'
+        daycare.set_daycare_name(arg)
+
+    def do_change_boss(self, arg):
+        'Change boss to a new one: change_boss name'
+        try:
+            daycare.set_boss_name(arg)
+        except Exception as e:
+            print(f"Error: {e}")
+
+    def do_daycare_info(self, arg):
+        'Show info about the daycare'
+        daycare.show_daycare_info()
 
     def do_quit(self, arg):
         'Exit the program'

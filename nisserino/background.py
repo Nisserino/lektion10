@@ -55,15 +55,18 @@ class Dog_daycare:
         self.boss = boss
         self.dogs = []
 
-    def set_name(self, name):
+    def set_daycare_name(self, name):
         self.name = name
 
     def set_boss_name(self, boss):
         self.boss = boss
 
     def add_dog(self, name, age, owner):
-        dog_add = Dog(name, age, owner)
-        self.dogs.append(dog_add)
+        try:
+            dog_add = Dog(name, age, owner)
+            self.dogs.append(dog_add)
+        except Exception as e:
+            print(f"Error: {e}")
 
     def find_dog(self, name):
         for dog in self.dogs:
@@ -76,3 +79,10 @@ class Dog_daycare:
     def show_dogs(self):
         for dog in self.dogs:
             print(dog.name)
+
+    def show_daycare_info(self):
+        print(
+            f"Daycare name: {self.name.title()}\n"
+            f"Daycare boss: {self.boss.title()}\n"
+            f"Amount of dogs enrolled: {len(self.dogs)}"
+        )
