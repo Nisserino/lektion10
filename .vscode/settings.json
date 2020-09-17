@@ -2,5 +2,6 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "editor.rulers": [72, 79]
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "autopep8"
 }
